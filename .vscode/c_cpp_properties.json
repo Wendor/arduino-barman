@@ -7,7 +7,6 @@
                 "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\**",
                 "C:\\Program Files (x86)\\Arduino\\tools\\**",
                 "C:\\Program Files (x86)\\Arduino\\libraries\\**",
-                "${workspaceFolder}\\..\\libraries\\**",
                 "${workspaceFolder}\\images\\**"
             ],
             "forcedInclude": [
