@@ -7,7 +7,7 @@
                 "C:\\Program Files (x86)\\Arduino\\hardware\\tools\\**",
                 "C:\\Program Files (x86)\\Arduino\\tools\\**",
                 "C:\\Program Files (x86)\\Arduino\\libraries\\**",
-                "${workspaceFolder}\\libraries\\**",
+                "${workspaceFolder}\\..\\libraries\\**",
                 "${workspaceFolder}\\images\\**"
             ],
             "forcedInclude": [
@@ -18,7 +18,8 @@
             "cStandard": "gnu11",
             "cppStandard": "gnu++14",
             "defines": [
-                "ARDUINO=10813"
+                "ARDUINO=10813",
+                "USBCON"
             ]
         }
     ],
