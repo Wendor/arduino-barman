@@ -15,7 +15,7 @@ const int slotSpacer = (oledWidth - spriteSize * totalSlots) / (totalSlots - 1);
 
 int slots[totalSlots] = {};
 int capacity = 0;
-int part = 0;
+int part = 25;
 int total = 0;
 
 unsigned long lastDisplayTime = 0;
@@ -36,15 +36,18 @@ void loop() {
   unsigned long currentTime = millis();
 
   enc1.tick();
-  if (enc1.isRight()) part++;
-  if (enc1.isLeft()) part--;
+  if (enc1.isRight()) part = min(part+1, 50);
+  if (enc1.isLeft()) part = max(part-1, 5);
   if (enc1.isTurn()) lastDisplayTime = 0;
   if (enc1.isHold() && !holded) {
     generateData();
   }
   holded = enc1.isHold();
 
+
+  // redraw display
   if(currentTime - lastDisplayTime < 2000) return;
+
   lastDisplayTime = millis();
   
   for(int i = 0; i < totalSlots; i++) {
@@ -69,7 +72,7 @@ void generateData() {
     slots[i] = random(3);
   }
   capacity = random(100);
-  total = part*random(5,50);
+  total = 900;
   lastDisplayTime = 0;
 }
 
