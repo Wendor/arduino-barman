@@ -3,5 +3,6 @@
     "configuration": "cpu=atmega328old",
     "port": "COM5",
     "sketch": "barman.ino",
-    "prebuild": "npm run convert"
+    "prebuild": "npm run convert",
+    "output": "./build"
 }
