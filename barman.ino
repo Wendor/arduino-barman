@@ -2,6 +2,7 @@
 #include <GyverEncoder.h>
 #include "Barman.h"
 #include "GeneralProperties.h"
+#include "Boombox.h"
 
 #include "images/images.cpp"
 
@@ -10,6 +11,7 @@ Encoder encoder(6, 5, 4);
 GeneralProperties _gp = { 128, 32, 16, 5 };
 
 Barman barman(_gp);
+Boombox boombox(A3);
 
 unsigned long lastDisplayTime = 0;
 bool forceRedraw = true;
@@ -28,6 +30,7 @@ void loop() {
 
   encoder.tick();
   barman.tick();
+  boombox.tick();
 
   if (encoder.isRight()) barman.portionIncrease();
   if (encoder.isLeft()) barman.portionDecrease();
@@ -36,6 +39,7 @@ void loop() {
   if (encoder.isClick()) {
     barman.generateData();
     forceRedraw = true;
+    boombox.play(0);
   }
 
   // redraw display
