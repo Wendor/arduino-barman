@@ -1,7 +1,7 @@
 {
     "board": "arduino:avr:nano",
     "configuration": "cpu=atmega328old",
-    "port": "COM3",
+    "port": "COM5",
     "sketch": "barman.ino",
     "prebuild": "npm run convert"
 }
