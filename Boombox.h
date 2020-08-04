@@ -15,7 +15,7 @@ class Boombox {
   private:
     uint8_t _pin;
     unsigned long _toneStart;
-    Melody _melodies[4];
+    Melody _melodies[5];
     bool _playing;
     uint8_t _playingMelody;
     uint8_t _playingNote;

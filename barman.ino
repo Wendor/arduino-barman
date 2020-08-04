@@ -18,11 +18,13 @@ bool forceRedraw = true;
 
 void setup()
 {
+  randomSeed(A0);
   encoder.setType(AUTO);
   display.setFixedFont( ssd1306xled_font6x8 );
   display.begin();
   display.clear();
   Serial.begin(9600);
+  boombox.play(4);
 }
 
 void loop() {
@@ -42,7 +44,7 @@ void loop() {
   if (encoder.isClick()) {
     barman.generateData();
     forceRedraw = true;
-    boombox.play(2);
+    boombox.play(3);
   }
 
   // redraw display
