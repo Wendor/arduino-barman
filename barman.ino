@@ -16,17 +16,74 @@ Boombox boombox(A3);
 unsigned long lastDisplayTime = 0;
 bool forceRedraw = true;
 
+enum states { initialyzing, tuning, working, pouring, tuningCount, tuningVolume };
+states state;
+
 void setup()
 {
   encoder.setType(AUTO);
   display.setFixedFont( ssd1306xled_font6x8 );
   display.begin();
   display.clear();
+  state = initialyzing;
   Serial.begin(9600);
   boombox.play(4);
-}
+};
 
 void loop() {
+  switch (state)
+  {
+    case initialyzing:
+      initialyzingAct();
+      break;
+
+    case tuning:
+      /* code */
+      break;
+
+    case working:
+      workingAct();
+      break;
+
+    case pouring:
+      /* code */
+      break;
+
+    case tuningVolume:
+      tuningVolumeAct();
+      break;
+    
+    default:
+      break;
+  }
+  
+}
+
+void initialyzingAct()
+{
+  if (lastDisplayTime < 1)
+  {
+    lastDisplayTime = millis();
+  }
+  boombox.tick();
+  if (!boombox.isPlaying() || encoder.isClick())
+  {
+    display.clear();
+    state = tuningVolume;
+    forceRedraw = true;
+    return;
+  }
+  if (forceRedraw)
+  {
+    display.setFixedFont( ssd1306xled_font8x16 );
+    display.printFixed(0, 0, "Hello");
+    forceRedraw = false;
+  }
+}
+
+void workingAct()
+{
+  display.setFixedFont( ssd1306xled_font6x8 );
   unsigned long currentTime = millis();
 
   encoder.tick();
@@ -61,6 +118,43 @@ void loop() {
   drawBattery(barman.getCapacity());
 }
 
+void tuningVolumeAct()
+{
+  display.setFixedFont( ssd1306xled_font6x8 );
+  unsigned long currentTime = millis();
+
+  encoder.tick();
+  barman.tick();
+  boombox.tick();
+
+  if (encoder.isRight()) barman.portionIncrease();
+  if (encoder.isLeft()) barman.portionDecrease();
+
+  if (encoder.isTurn()) {
+    forceRedraw = true;
+    boombox.play(0);
+  }
+  if (encoder.isClick()) {
+    //barman.generateData();
+    forceRedraw = true;
+    state = working;
+    display.clear();
+    return;
+    //boombox.play(3);
+  }
+
+  // redraw display
+  if(!forceRedraw && abs(currentTime - lastDisplayTime) < 2000) return;
+  lastDisplayTime = currentTime;
+  forceRedraw = false;
+  
+  drawCaption(barman.getCaption());
+  drawInfo("Please select", 16);
+  drawInfo("volume of cup", 24);
+  drawBattery(barman.getCapacity());
+}
+
+
 void drawSlot(int slot, const uint8_t * cap) {
   uint8_t slotSpacer = (_gp.width - _gp.spriteSize * _gp.totalSlots) / (_gp.totalSlots - 1);
   int x = slot * _gp.spriteSize + slot * slotSpacer;
@@ -69,6 +163,10 @@ void drawSlot(int slot, const uint8_t * cap) {
 
 void drawCaption(String text) {
   display.printFixed(0, 0, text.c_str());
+}
+
+void drawInfo(String text, lcdint_t yPosition) {
+  display.printFixed(0, yPosition, text.c_str());
 }
 
 void drawBattery(int capacity) {

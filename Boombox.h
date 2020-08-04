@@ -12,6 +12,7 @@ class Boombox {
     Boombox(uint8_t pin);
     void tick();
     void play(uint8_t melody);
+    bool isPlaying();
   private:
     uint8_t _pin;
     unsigned long _toneStart;

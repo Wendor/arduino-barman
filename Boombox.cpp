@@ -69,6 +69,10 @@ void Boombox::play(uint8_t melody)  {
   tick();
 };
 
+bool Boombox::isPlaying(){
+  return _playing;
+}
+
 void Boombox::tick() {
   if(_playing) {
     for (int thisNote = 0; thisNote < _melodies[_playingMelody].length; thisNote++) {
