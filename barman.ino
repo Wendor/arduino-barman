@@ -18,7 +18,6 @@ bool forceRedraw = true;
 
 void setup()
 {
-  randomSeed(A0);
   encoder.setType(AUTO);
   display.setFixedFont( ssd1306xled_font6x8 );
   display.begin();
