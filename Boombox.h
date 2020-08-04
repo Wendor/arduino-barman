@@ -3,8 +3,8 @@
 
 struct Melody {
   uint8_t length;
-  int notes[8];
-  uint8_t noteDurations[8];
+  int notes[32];
+  uint8_t noteDurations[32];
 };
 
 class Boombox {
@@ -15,7 +15,7 @@ class Boombox {
   private:
     uint8_t _pin;
     unsigned long _toneStart;
-    Melody _melodies[1];
+    Melody _melodies[4];
     bool _playing;
     uint8_t _playingMelody;
     uint8_t _playingNote;

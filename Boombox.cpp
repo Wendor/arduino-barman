@@ -7,13 +7,32 @@ Boombox::Boombox(uint8_t pin) {
   pinMode(_pin, OUTPUT);
 
   _melodies[0] = {
+    1,
+    { NOTE_D3 },
+    { 32 }
+  };
+
+  _melodies[1] = {
     8,
     { NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, 0, NOTE_B3, NOTE_C4 },
     { 4, 8, 8, 4, 4, 4, 4, 4 }
   };
+
+  _melodies[2] = {
+    17,
+    {
+      NOTE_A3, NOTE_E4, NOTE_B4, NOTE_C5, 0, NOTE_E4, NOTE_D4, NOTE_E4, NOTE_D4, NOTE_C4,
+      NOTE_F3, NOTE_C4, NOTE_G4, NOTE_A4, 0, NOTE_D4, NOTE_C4
+     },
+    {
+      4, 4, 4, 4, 4, 4, 8, 16, 16, 4,
+      4, 4, 4, 4, 4, 4, 3
+    }
+  };
 };
 
 void Boombox::play(uint8_t melody)  {
+  if(_playing) return;
   _playing = true;
   _playingTime = millis();
   _playingMelody = melody;

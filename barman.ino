@@ -35,11 +35,14 @@ void loop() {
   if (encoder.isRight()) barman.portionIncrease();
   if (encoder.isLeft()) barman.portionDecrease();
 
-  if (encoder.isTurn()) forceRedraw = true;
+  if (encoder.isTurn()) {
+    forceRedraw = true;
+    boombox.play(0);
+  }
   if (encoder.isClick()) {
     barman.generateData();
     forceRedraw = true;
-    boombox.play(0);
+    boombox.play(2);
   }
 
   // redraw display
