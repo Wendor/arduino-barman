@@ -1,11 +1,6 @@
 #pragma once
 #include <Arduino.h>
-
-struct Melody {
-  uint8_t length;
-  int notes[32];
-  uint8_t noteDurations[32];
-};
+#include "melodies/melody.h"
 
 class Boombox {
   public:
@@ -16,10 +11,10 @@ class Boombox {
   private:
     uint8_t _pin;
     unsigned long _toneStart;
-    Melody _melodies[5];
     bool _playing;
-    uint8_t _playingMelody;
+    Melody _playingMelody;
     uint8_t _playingNote;
     unsigned long _playingTime;
-    void _nextNote(uint8_t melody);
+    void _nextNote();
+    unsigned long _currentTime;
 };

@@ -27,7 +27,6 @@ void setup()
   display.clear();
   state = initialyzing;
   Serial.begin(9600);
-  boombox.play(4);
 };
 
 void loop() {
@@ -100,7 +99,7 @@ void workingAct()
   if (encoder.isClick()) {
     barman.generateData();
     forceRedraw = true;
-    boombox.play(3);
+    boombox.play(barman.getPortion());
   }
 
   // redraw display

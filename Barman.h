@@ -30,6 +30,9 @@ public:
   /// Возвращает емкость аккумулятора
   uint8_t getCapacity();
 
+  /// Возвращает порцию
+  uint8_t getPortion();
+
 private:
   /// Параметры дисплея
   GeneralProperties _gp;
