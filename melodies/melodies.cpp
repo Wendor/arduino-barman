@@ -2,15 +2,13 @@
 #include "melody.h"
 
 /// Beep
-static const Melody melody0 PROGMEM = {
-  1, 240, 0,
+static const Melody melody0 PROGMEM = { 1, 240, 0,
   { NOTE_D3 },
   { 1 }
 };
 
 /// Деревня дураков 1
-static const Melody melody1 PROGMEM = {
-  28, 160, 2,
+static const Melody melody1 PROGMEM = { 28, 160, 2,
   {
     NOTE_GS6, NOTE_AS6, NOTE_GS6, NOTE_G6, NOTE_GS6, NOTE_AS6, NOTE_C7, NOTE_CS7,
     NOTE_DS7, NOTE_C7, NOTE_C7, NOTE_C7, NOTE_C7, NOTE_C7, 0,

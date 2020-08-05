@@ -11,6 +11,9 @@ Boombox::Boombox(uint8_t pin) {
 };
 
 void Boombox::play(uint8_t melody)  {
+  uint8_t melodiesCount = sizeof(melodies)/sizeof(melodies[0]);
+  if(melody >= melodiesCount) return;
+
   if(_playing) return;
   _playing = true;
   _playingTime = _currentTime;

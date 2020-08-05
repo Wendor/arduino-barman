@@ -42,7 +42,7 @@ void loop() {
   if (encoder.isClick()) {
     barman.generateData();
     forceRedraw = true;
-    boombox.play(6);
+    boombox.play(barman.getPortion());
   }
 
   // redraw display
