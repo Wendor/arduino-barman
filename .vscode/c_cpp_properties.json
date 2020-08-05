@@ -10,7 +10,8 @@
                 "C:\\Program Files (x86)\\Arduino\\libraries\\lcdgfx",
                 "C:\\Program Files (x86)\\Arduino\\libraries\\**",
                 "${workspaceFolder}\\..\\libraries\\**",
-                "${workspaceFolder}\\images\\**"
+                "${workspaceFolder}\\images\\**",
+                "${workspaceFolder}\\melodies\\**"
             ],
             "forcedInclude": [
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h"
