@@ -4,7 +4,7 @@
 Barman::Barman(GeneralProperties gp) {
   _gp = gp;
   _workMode = 0;
-  _portion = 25;
+  _portion = 1;
   _total = 900;
   _capacity = 100;
 
@@ -42,7 +42,7 @@ void Barman::portionIncrease() {
 }
 
 void Barman::portionDecrease() {
-  _portion = max(_portion - 1, 10);
+  _portion = max(_portion - 1, 0);
 }
 
 void Barman::tick() {
@@ -55,4 +55,8 @@ uint8_t * Barman::getSlots(){
 
 uint8_t Barman::getCapacity() {
   return _capacity;
+}
+
+uint8_t Barman::getPortion() {
+  return _portion;
 }
