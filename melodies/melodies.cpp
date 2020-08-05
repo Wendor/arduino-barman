@@ -81,4 +81,58 @@ static const Melody melody5 PROGMEM = { 30, 140, 0,
   }
 };
 
-static const Melody melodies[6] = { melody0, melody1, melody2, melody3, melody4, melody5 };
+/// Star Wars - Cantina 1
+static const Melody melody6 PROGMEM = { 31, 160, 7,
+  {
+    NOTE_A5, NOTE_D6, NOTE_A5, NOTE_D6,
+    NOTE_A5, NOTE_D6, NOTE_A5, 0, NOTE_GS5, NOTE_A5,
+    NOTE_A5, NOTE_GS5, NOTE_A5, NOTE_G5, 0, NOTE_FS5, NOTE_G5, NOTE_FS5,
+    NOTE_F5, NOTE_D5, 0,
+    NOTE_A5, NOTE_D6, NOTE_A5, NOTE_D6,
+    NOTE_A5, NOTE_D6, NOTE_A5, 0, NOTE_GS5, NOTE_A5
+  },
+  {
+    4,4,4,4,
+    2,4,2,2,2,4,
+    2,2,2,2,2,2,2,2,
+    6,2,8,
+    4,4,4,4,
+    2,4,2,2,2,4
+  }
+};
+
+/// Star Wars - Cantina 2
+static const Melody melody7 PROGMEM = { 31, 160, 8,
+  {
+    NOTE_G5, 0, NOTE_G5, 0, NOTE_FS5, NOTE_G5,
+    NOTE_C6, NOTE_AS5, NOTE_A5, NOTE_G5,
+    NOTE_A5, NOTE_D6, NOTE_A5, NOTE_D6,
+    NOTE_A5, NOTE_D6, NOTE_A5, 0, NOTE_GS5, NOTE_A5,
+    NOTE_C6, 0, NOTE_C6, 0, NOTE_A5, NOTE_G5,
+    NOTE_F5, NOTE_D5, 0,
+    NOTE_D5, NOTE_F5,
+  },
+  {
+    2,2,4,2,2,4,
+    2,4,4,6,
+    4,4,4,4,
+    2,4,2,2,2,4,
+    2,2,4,2,2,4,
+    6,2,8,
+    8,8
+  }
+};
+
+/// Star Wars - Cantina 3
+static const Melody melody8 PROGMEM = { 7, 160, 0,
+  {
+    NOTE_A5, NOTE_C6,
+    NOTE_DS6, NOTE_D6, NOTE_GS5, NOTE_A5, NOTE_F5
+  },
+  {
+    8,8,
+    4,4,2,4,2
+  }
+};
+
+static const Melody melodies[9] = { melody0, melody1, melody2, melody3, melody4, melody5, melody6, melody7, melody8 };
