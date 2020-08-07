@@ -21,12 +21,22 @@ void Barman::generateData() {
   _total = 900;
 }
 
+void Barman::setPouringMode(String mode)
+{
+  _pouringMode = mode;
+}
+
 void Barman::setSlotSprite(int slot, int sprite) {
   _slots[slot] = sprite;
 }
 
 String Barman::getCaption() {
-  String caption = "A " + String(_portion)+ "ml/" + String(_total) + "ml";
+  if (_pouringMode == NULL)
+  {
+    _pouringMode = "M";
+  }
+  
+  String caption = _pouringMode + " " + String(_portion)+ "ml/" + String(_total) + "ml";
   int spaces = floor(_gp.width / 6) - 4 - caption.length() - String(_capacity).length();
 
   for(int i = 0; i < spaces; i ++) {

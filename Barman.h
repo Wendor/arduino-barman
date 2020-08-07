@@ -33,6 +33,9 @@ public:
   /// Возвращает порцию
   uint8_t getPortion();
 
+  /// Режим разлива
+  void setPouringMode(String mode);
+
 private:
   /// Параметры дисплея
   GeneralProperties _gp;
@@ -51,4 +54,7 @@ private:
 
   /// Слоты
   uint8_t _slots[5];
+
+  /// Режим разлива
+  String _pouringMode;
 };

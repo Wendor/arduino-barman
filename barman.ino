@@ -193,9 +193,11 @@ void modeSelectingAct()
     {
     case 0:
       pouringMode = automatic;
+      barman.setPouringMode("A");
       break;
     case 1:
       pouringMode = manual;
+      barman.setPouringMode("M");
       break;
     default:
       break;
