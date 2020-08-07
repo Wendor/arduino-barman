@@ -8,6 +8,7 @@ class Boombox {
     void tick();
     void play(uint8_t melody);
     bool isPlaying();
+    void stop();
   private:
     uint8_t _pin;
     unsigned long _toneStart;

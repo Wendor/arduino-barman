@@ -16,8 +16,17 @@ Boombox boombox(A3);
 unsigned long lastDisplayTime = 0;
 bool forceRedraw = true;
 
-enum states { initialyzing, tuning, working, pouring, tuningCount, tuningVolume };
+enum states { initialyzing, working, pouring, tuningCount, volumeTuning, modeSelecting };
+enum pouringModes { automatic, manual };
 states state;
+pouringModes pouringMode;
+
+const char *modeItemsMenu[] = {
+    "Automatic",
+    "Manual"
+};
+SAppMenu menu;
+bool isShowMenu = false;
 
 void setup()
 {
@@ -27,6 +36,7 @@ void setup()
   display.clear();
   state = initialyzing;
   Serial.begin(9600);
+  boombox.play(5);
 };
 
 void loop() {
@@ -34,10 +44,6 @@ void loop() {
   {
     case initialyzing:
       initialyzingAct();
-      break;
-
-    case tuning:
-      /* code */
       break;
 
     case working:
@@ -48,10 +54,14 @@ void loop() {
       /* code */
       break;
 
-    case tuningVolume:
+    case volumeTuning:
       tuningVolumeAct();
       break;
     
+    case modeSelecting:
+      modeSelectingAct();
+      break;
+
     default:
       break;
   }
@@ -68,7 +78,7 @@ void initialyzingAct()
   if (!boombox.isPlaying() || encoder.isClick())
   {
     display.clear();
-    state = tuningVolume;
+    state = volumeTuning;
     forceRedraw = true;
     return;
   }
@@ -91,6 +101,13 @@ void workingAct()
 
   if (encoder.isRight()) barman.portionIncrease();
   if (encoder.isLeft()) barman.portionDecrease();
+
+  if (encoder.isDouble())
+  {
+    ChangeState(volumeTuning);
+    return;
+  }
+  
 
   if (encoder.isTurn()) {
     forceRedraw = true;
@@ -134,12 +151,8 @@ void tuningVolumeAct()
     boombox.play(0);
   }
   if (encoder.isClick()) {
-    //barman.generateData();
-    forceRedraw = true;
-    state = working;
-    display.clear();
+    ChangeState(modeSelecting);
     return;
-    //boombox.play(3);
   }
 
   // redraw display
@@ -153,6 +166,47 @@ void tuningVolumeAct()
   drawBattery(barman.getCapacity());
 }
 
+void modeSelectingAct()
+{
+  if (!isShowMenu)
+  {
+    display.createMenu( &menu, modeItemsMenu, sizeof(modeItemsMenu) / sizeof(char *), {10, 10, 120, 15} );
+    display.showMenu( &menu );
+    drawCaption(barman.getCaption());
+    isShowMenu = true;
+  }
+  drawBattery(barman.getCapacity());
+  encoder.tick();
+  if (encoder.isLeft())
+  {
+    display.menuDown(&menu);
+    display.updateMenu(&menu);
+  }
+  if (encoder.isRight())
+  {
+    display.menuUp(&menu);
+    display.updateMenu(&menu);
+  }
+  if (encoder.isClick())
+  {
+    switch (display.menuSelection(&menu))
+    {
+    case 0:
+      pouringMode = automatic;
+      break;
+    case 1:
+      pouringMode = manual;
+      break;
+    default:
+      break;
+    }
+    isShowMenu = false;
+    ChangeState(working);
+  }
+  
+  
+  
+}
 
 void drawSlot(int slot, const uint8_t * cap) {
   uint8_t slotSpacer = (_gp.width - _gp.spriteSize * _gp.totalSlots) / (_gp.totalSlots - 1);
@@ -176,4 +230,12 @@ void drawBattery(int capacity) {
   if(capacity <= 5) current = 0;
 
   display.drawBitmap1(_gp.width - _gp.spriteSize, 0, _gp.spriteSize, _gp.spriteSize/2, batteries[current]);
+}
+
+void ChangeState(states newState)
+{
+  state = newState;
+  display.clear();
+  boombox.stop();
+  forceRedraw = true;
 }

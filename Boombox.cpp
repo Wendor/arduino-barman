@@ -23,6 +23,11 @@ bool Boombox::isPlaying(){
   return _playing;
 }
 
+void Boombox::stop()
+{
+  _playing = false;
+}
+
 void Boombox::tick() {
   _currentTime = millis();
   if(_playing) {
